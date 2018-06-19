@@ -10,7 +10,7 @@ var app = express();
 app.use(express.static(__dirname + "/public"));
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 // override with POST having ?_method=DELETE
 app.use(methodOverride("_method"));
 
@@ -28,6 +28,9 @@ app.set("view engine", "handlebars");
 var routes = require("./controllers/burgers_controller.js");
 
 app.use('/', routes);
+app.use("/update", routes);
+app.use("/create", routes);
+
 
 // Start our server so that it can begin listening to client requests.
 app.listen(PORT, function() {
